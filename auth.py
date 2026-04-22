@@ -85,7 +85,10 @@ def render_auth_ui():
     auth_token = cookie_manager.get(cookie="auth_token")
     
     if st.session_state.get("force_logout", False):
-        cookie_manager.delete("auth_token", key="delete_cookie_auth")
+        try:
+            cookie_manager.delete("auth_token", key="delete_cookie_auth")
+        except KeyError:
+            pass
         st.session_state.force_logout = False
         auth_token = None
 
