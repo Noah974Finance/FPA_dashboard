@@ -75,9 +75,9 @@ def handle_google_oauth():
                 else:
                     st.error("Impossible de lire l'e-mail depuis Google.")
             else:
-                st.error("Échec de la récupération du profil Google.")
+                st.error(f"Échec de la récupération du profil Google. Code: {user_res.status_code}, Détails: {user_res.text}")
         else:
-            st.error("Échec de l'authentification Google.")
+            st.error(f"Échec de l'authentification Google. Code: {res.status_code}, Détails: {res.text}")
         st.query_params.clear()
 
 def render_auth_ui():
