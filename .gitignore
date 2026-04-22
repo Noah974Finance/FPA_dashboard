@@ -1,0 +1,23 @@
+# Secrets
+.streamlit/secrets.toml
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Streamlit
+.streamlit/
+
+# Note: We keep config.toml if it has theme settings, but we ignore secrets
+!/.streamlit/config.toml
