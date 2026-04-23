@@ -73,11 +73,11 @@ def handle_google_oauth():
                     st.query_params.clear()
                     st.rerun()
                 else:
-                    st.error("Impossible de lire l'e-mail depuis Google.")
+                    st.error("Failed to read email from Google.")
             else:
-                st.error(f"Échec de la récupération du profil Google. Code: {user_res.status_code}, Détails: {user_res.text}")
+                st.error(f"Failed to retrieve Google profile. Code: {user_res.status_code}, Details: {user_res.text}")
         else:
-            st.error(f"Échec de l'authentification Google. Code: {res.status_code}, Détails: {res.text}")
+            st.error(f"Google authentication failed. Code: {res.status_code}, Details: {res.text}")
         st.query_params.clear()
 
 def render_auth_ui():
@@ -106,8 +106,8 @@ def render_auth_ui():
     st.markdown("""
     <div style="text-align:center;padding:40px 0 20px">
       <div style="font-size:48px">🔒</div>
-      <h1 style="font-size:2rem;font-weight:800;color:var(--text-color);margin:8px 0">Authentification Sécurisée</h1>
-      <p style="color:var(--text-color);opacity:0.7">Connectez-vous pour accéder au Dashboard FP&A</p>
+      <h1 style="font-size:2rem;font-weight:800;color:var(--text-color);margin:8px 0">Secure Authentication</h1>
+      <p style="color:var(--text-color);opacity:0.7">Sign in to access the FP&A Dashboard</p>
     </div>
     """, unsafe_allow_html=True)
     
@@ -116,11 +116,11 @@ def render_auth_ui():
     with col2:
         if enabled:
             auth_url = f"https://accounts.google.com/o/oauth2/v2/auth?response_type=code&client_id={client_id}&redirect_uri={urllib.parse.quote(redirect_uri)}&scope=openid%20email%20profile"
-            st.link_button("🌐 Continuer avec Google", auth_url, use_container_width=True)
+            st.link_button("🌐 Sign in with Google", auth_url, use_container_width=True)
 
         st.markdown("<br>", unsafe_allow_html=True)
         
-        if st.button("👤 Continuer en tant qu'invité", use_container_width=True):
+        if st.button("👤 Continue as Guest", use_container_width=True):
             import uuid
             st.session_state.authenticated = True
             st.session_state.user_email = f"guest_{uuid.uuid4().hex[:8]}"

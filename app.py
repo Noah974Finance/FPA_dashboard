@@ -180,19 +180,19 @@ with st.sidebar:
     </div>
     """, unsafe_allow_html=True)
     
-    st.markdown("### 📥 Importer des données")
+    st.markdown("### 📥 Import Data")
     
     try:
         with open("FPA_Template.xlsx", "rb") as file:
             st.download_button(
-                label="📄 Télécharger le Template Vierge",
+                label="📄 Download Blank Template",
                 data=file,
                 file_name="FPA_Template.xlsx",
                 mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
                 use_container_width=True
             )
     except FileNotFoundError:
-        st.warning("Template vierge non trouvé.")
+        st.warning("Blank template not found.")
         
     st.markdown("---")
 
@@ -234,13 +234,13 @@ with st.sidebar:
         )
         st.session_state.active = sel
         
-        st.session_state.compare_mode = st.toggle("🔄 Mode Comparaison")
+        st.session_state.compare_mode = st.toggle("🔄 Comparison Mode")
         if st.session_state.compare_mode:
             comp_list = [c for c in companies if c != st.session_state.active]
             if comp_list:
-                st.session_state.secondary = st.selectbox("Comparer avec :", comp_list)
+                st.session_state.secondary = st.selectbox("Compare with:", comp_list)
             else:
-                st.warning("Importez un 2ème fichier.")
+                st.warning("Upload a 2nd file to enable comparison.")
                 st.session_state.secondary = None
         else:
             st.session_state.secondary = None
@@ -266,7 +266,7 @@ with st.sidebar:
     st.caption("Upload multiple files to compare companies side-by-side.")
 
     st.markdown("---")
-    if st.button("🚪 Se déconnecter", use_container_width=True):
+    if st.button("🚪 Logout", use_container_width=True):
         st.session_state.authenticated = False
         st.session_state.force_logout = True
         st.session_state.companies = {}
@@ -1206,11 +1206,11 @@ with tabs[6]:
     # Dynamic Income Statement
     sec("Dynamic Income Statement (What-If Interactive)")
     
-    st.markdown("### 🎛️ Simulateur Interactif")
+    st.markdown("### 🎛️ Interactive Simulator")
     col_s1, col_s2, col_s3 = st.columns(3)
-    sim_rev = col_s1.slider("Croissance Revenus (%)", -50, 100, 10, 1) / 100.0
-    sim_opex = col_s2.slider("Évolution Dépenses (%)", -50, 100, 5, 1) / 100.0
-    sim_churn = col_s3.slider("Taux de Churn (%)", 0, 50, 2, 1) / 100.0
+    sim_rev = col_s1.slider("Revenue Growth (%)", -50, 100, 10, 1) / 100.0
+    sim_opex = col_s2.slider("Expense Growth (%)", -50, 100, 5, 1) / 100.0
+    sim_churn = col_s3.slider("Churn Rate (%)", 0, 50, 2, 1) / 100.0
     
     if is_rows:
         dynamic_is_rows = []
