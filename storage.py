@@ -18,7 +18,7 @@ def supabase_request(method, table, params=None, json_data=None):
         return requests.patch(url, headers=headers, params=params, json=json_data).json()
 
 def save_financial_data(email, data_dict):
-    if not email:
+    if not email or str(email).startswith("guest_"):
         return False
         
     company_name = data_dict.get("company_name", "Unknown")
@@ -51,7 +51,7 @@ def save_financial_data(email, data_dict):
         return False
 
 def load_user_financial_data(email):
-    if not email:
+    if not email or str(email).startswith("guest_"):
         return {}
         
     res = supabase_request("GET", "user_files", params={
